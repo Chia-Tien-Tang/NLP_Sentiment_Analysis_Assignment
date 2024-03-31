@@ -45,5 +45,27 @@ After gaining a better understanding of the dataset, we proceeded to explore var
 4. **Feature Representation**:
 Text data is converted into input IDs (`input_ids`) and attention masks (`attention_mask`), where `input_ids` represent word IDs in the vocabulary, and `attention_mask` indicates real words versus padding by a binary sequence.
 
-5.**Classifier Architecture:**
+5. **Classifier Architecture:**
 Finally, these features are passed through a linear layer, which maps the 768-dimensional features from the BERT output to predictions for three polarity categories. The classifier also includes a mean pooling layer used to extract feature representations from the output of the model. This composite feature representation allows the model to effectively categorize sentiments in the given sentiment analysis task.
+
+##  Model Selection
+
+- We tried out multiple models including DistilBERT, BERT, RoBERTa, ELECTRA, and DeBERTa. All selected models are from the transformer family and have been pre-trained on large text corpora.
+- As for the resources,the classifier makes use of pre-trained transformer models and tokenizers provided by the Hugging Face `transformers` library.
+
+###  Results comparison（Completed 5 runs.）
+
+| Model                           | Mean Dev Accuracy (%) | Standard Deviation (%) | Execution Time (s) | Time Per Run (s) |
+|---------------------------------|-----------------------|------------------------|---------------------|------------------|
+| DistilBert                      | 56.38                 | 1.48                   | 1559.93             | 311              |
+| ELECTRA Small Discriminator     | 56.97                 | 2.90                   | 654.47              | 130              |
+| Bert                            | -                     | -                      | -                   | -                |
+| Roberta                         | -                     | -                      | -                   | -                |
+| Deberta                         | -                     | -                      | -                   | -                |
+
+Based on the comparison results, although RoBERTa achieves the best performance, considering factors such as training time and accuracy, especially since the reference paper utilized BERT, we ultimately chose BERT-base-uncased as our final classifier. Below is the accuracy we obtained on the dev dataset.
+
+| Model                           | Mean Dev Accuracy (%) | Standard Deviation (%) | Execution Time (s) | Time Per Run (s) |
+|---------------------------------|-----------------------|------------------------|---------------------|------------------|
+| Bert                            | 84.47                 | 0.40                   | 1929.01             | 385              |
+
