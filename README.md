@@ -29,6 +29,21 @@ The dataset consists of five columns, namely:
 **What we Explored**:
 
 - Both the training and validation sets are imbalanced datasets, particularly in terms of the "neutral" polarity.
-- Each sentence in the dataset may correspond to multiple aspect categories, each with potentially different polarity evaluations.
 - The same sentence may appear multiple times in the dataset due to different aspects or target terms, each time potentially having a different polarity evaluation.
 - If a review contains a negative sentiment for a given aspect, other aspects will most likely be rated negative as well.
+
+After gaining a better understanding of the dataset, we proceeded to explore various types of classification models along with different input and feature representations.
+
+## Input and feature representation
+
+1. **Input Preprocessing**: We first loaded the data and converted the polarity labels into numerical format.The Classifier then accepts all the feature columns as input.When predicting,polarity labels are then labeled back.
+
+2. **Formatting and Tokenization**: We performed formatting and automation from text to model input. We utilized the `encode_plus` method of the BERT tokenizer to process input sentences. The tokenizer added special tokens, [CLS] and [SEP], at the beginning and end of each sentence. The maximum sequence length output by the tokenizer was set to 128. For sentences shorter than the maximum sequence length, padding tokens were added. If the length of a sentence exceeded the maximum length, it was truncated. Additionally, we specified to return the attention mask accordingly.
+
+3. **Data Preparation and Training Setups**: Following the conventional workflow, we set the batch size of the dataloader to 16, and shuffle the training set to improve robustness. The initial number of epochs is set to 3, which can be adjusted as needed, we run 5 epochs. We choose AdamW as our optimizer, with the learning rate set to the commonly used 5e-5, and linearly decrease the learning rate during the training phase for fine-tuning. And Cross-entropy is used as the loss function.
+
+4. **Feature Representation**:
+Text data is converted into input IDs (`input_ids`) and attention masks (`attention_mask`), where `input_ids` represent word IDs in the vocabulary, and `attention_mask` indicates real words versus padding by a binary sequence.
+
+5.**Classifier Architecture:**
+Finally, these features are passed through a linear layer, which maps the 768-dimensional features from the BERT output to predictions for three polarity categories. The classifier also includes a mean pooling layer used to extract feature representations from the output of the model. This composite feature representation allows the model to effectively categorize sentiments in the given sentiment analysis task.
