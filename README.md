@@ -20,6 +20,7 @@ Chia Tien Tang, Zheng Wan, Weijing Zeng, Killian Le Metayer
 
 **Reference Paper**
 - `220708099.pdf`: "Aspect-specific Context Modeling for Aspect-based Sentiment Analysis" (Ma et al., arXiv:2207.08099).
+
 **Others**
 - `README.md`: Markdown file providing an overview of the repository, instructions on how to use the code, install dependencies, or other general information.
 - `nlp_assignment_doc_2024.pdf`: Project documentation detailing specifications and requirements.
@@ -58,13 +59,15 @@ Text data is converted into input IDs (`input_ids`) and attention masks (`attent
 5. **Classifier Architecture:**
 Finally, these features are passed through a linear layer, which maps the 768-dimensional features from the BERT output to predictions for three polarity categories. The classifier also includes a mean pooling layer used to extract feature representations from the output of the model. This composite feature representation allows the model to effectively categorize sentiments in the given sentiment analysis task.
 
-##  Model Selection
+## Model Selection
 
 - We tried out multiple models including DistilBERT, BERT, RoBERTa, ELECTRA, and DeBERTa. All selected models are from the transformer family and have been pre-trained on large text corpora.
 - As for the resources,the classifier makes use of pre-trained transformer models and tokenizers provided by the Hugging Face `transformers` library.
 
+## Reference Paper
+The paper introduces an innovative approach to aspect-based sentiment analysis (ABSA), aimed at improving the ability of pre-trained language models (PLMs) like BERT to perform ABSA tasks. It proposes three aspect-oriented input transformation methods to enhance the focus of PLMs on specific aspects within sentences and also presents an adversarial benchmark (advABSA) to test the robustness of models in context modeling for aspects. 
 
-
+Our model selection and architecture, including the construction of the `MeanPooling` class, are based on the methodologies from this paper to ensure more accurate capture and representation of aspect-related contextual information in sentiment analysis.
 ###  Results comparison（Completed 5 runs.）
 
 | Model                           | Mean Dev Accuracy (%) | Standard Deviation (%) | Execution Time (s) | Time Per Run (s) |
