@@ -1,19 +1,29 @@
 # NLP_Sentiment_Analysis_Assignment
-
-**To run the code**
-1. Open your terminal
-2. type cd [path to src folder]
-3. python tester.py
-
-
 ## Contributors
 
-The following students contributed to this deliverable:
+Chia Tien Tang, Zheng Wan, Weijing Zeng, Killian Le Metayer
 
-- Chia Tien Tang
-- Zheng Wan
-- Weijing Zeng
-- Killian Le Metayer
+## Overall Structure 
+**Code & Data**
+- `data`: This directory contains dataset files `devdata.csv` and `traindata.csv`
+**src**
+- `aspect_dataset.py`: Defines a custom dataset `AspectTermDataset`, used for loading and processing aspect-based sentiment data for training.
+- `classifier.py`: Contains the definition of sentiment classifier. This is where the model architecture and training/prediction methods are implemented.
+- `custom_layers.py`: Inspired by the reference paper. It contains the MeanPooling class by computing the mean pooled representation of relevant tokens from the last hidden state of BERT model by using an attention mask.This is used by `classifier.py`.
+- `tester.py`: Code to evaluate the classifier's performance.
+- `utils.py`: Utilities file for common functions that transform polarity labels between categorical and numerical representations.
+
+**EDA**
+- `EDA.ipynb`: Used for exploratory data analysis.
+- `check_version.ipynb`: Check and ensure that the correct versions of libraries are being used.
+- `classifier_for_training.py`: Where different models were compared. 
+
+**Reference Paper**
+- `220708099.pdf`: "Aspect-specific Context Modeling for Aspect-based Sentiment Analysis" (Ma et al., arXiv:2207.08099).
+**Others**
+- `README.md`: Markdown file providing an overview of the repository, instructions on how to use the code, install dependencies, or other general information.
+- `nlp_assignment_doc_2024.pdf`: Project documentation detailing specifications and requirements.
+- `Results.png`: A screenshot of model results .
 
 ## Exploratory Data Analysis（EDA）
 
@@ -34,7 +44,7 @@ The dataset consists of five columns, namely:
 
 After gaining a better understanding of the dataset, we proceeded to explore various types of classification models along with different input and feature representations.
 
-## Input and feature representation
+## Model Input and Feature Extraction Process
 
 1. **Input Preprocessing**: We first loaded the data and converted the polarity labels into numerical format.The Classifier then accepts all the feature columns as input.When predicting,polarity labels are then labeled back.
 
@@ -53,6 +63,8 @@ Finally, these features are passed through a linear layer, which maps the 768-di
 - We tried out multiple models including DistilBERT, BERT, RoBERTa, ELECTRA, and DeBERTa. All selected models are from the transformer family and have been pre-trained on large text corpora.
 - As for the resources,the classifier makes use of pre-trained transformer models and tokenizers provided by the Hugging Face `transformers` library.
 
+
+
 ###  Results comparison（Completed 5 runs.）
 
 | Model                           | Mean Dev Accuracy (%) | Standard Deviation (%) | Execution Time (s) | Time Per Run (s) |
@@ -69,3 +81,10 @@ Based on the comparison results, although RoBERTa achieves the best performance,
 |---------------------------------|-----------------------|------------------------|---------------------|------------------|
 | Bert                            | 84.47                 | 0.40                   | 1929.01             | 385              |
 
+
+
+**To run the code**
+
+1. Open your terminal
+2. Type `cd [path to src folder]`
+3. Run `python tester.py`
