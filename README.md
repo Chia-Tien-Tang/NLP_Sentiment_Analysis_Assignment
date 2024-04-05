@@ -68,17 +68,11 @@ Finally, these features are passed through a linear layer, which maps the 768-di
 The paper introduces an innovative approach to aspect-based sentiment analysis (ABSA), aimed at improving the ability of pre-trained language models (PLMs) like BERT to perform ABSA tasks. It proposes three aspect-oriented input transformation methods to enhance the focus of PLMs on specific aspects within sentences and also presents an adversarial benchmark (advABSA) to test the robustness of models in context modeling for aspects. 
 
 Our model selection and architecture, including the construction of the `MeanPooling` class, are based on the methodologies from this paper to ensure more accurate capture and representation of aspect-related contextual information in sentiment analysis.
-###  Results comparison（Completed 5 runs.）
+###  Results 
 
-| Model                           | Mean Dev Accuracy (%) | Standard Deviation (%) | Execution Time (s) | Time Per Run (s) |
-|---------------------------------|-----------------------|------------------------|---------------------|------------------|
-| DistilBert                      | 56.38                 | 1.48                   | 1559.93             | 311              |
-| ELECTRA Small Discriminator     | 56.97                 | 2.90                   | 654.47              | 130              |
-| Bert                            | -                     | -                      | -                   | -                |
-| Roberta                         | -                     | -                      | -                   | -                |
-| Deberta                         | -                     | -                      | -                   | -                |
+We conducted experiments using various models including DistilBert, ELECTRA Small Discriminator, Bert, Roberta, and Deberta.
 
-Based on the comparison results, although RoBERTa achieves the best performance, considering factors such as training time and accuracy, especially since the reference paper utilized BERT, we ultimately chose BERT-base-uncased as our final classifier. Below is the accuracy we obtained on the dev dataset.
+Based on the results, although RoBERTa achieves the best performance, considering factors such as training time and accuracy, especially since the reference paper utilized BERT, we ultimately chose BERT-base-uncased as our final classifier. Below is the accuracy we obtained on the dev dataset.
 
 | Model                           | Mean Dev Accuracy (%) | Standard Deviation (%) | Execution Time (s) | Time Per Run (s) |
 |---------------------------------|-----------------------|------------------------|---------------------|------------------|
